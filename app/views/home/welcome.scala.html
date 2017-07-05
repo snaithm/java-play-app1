@@ -1,0 +1,34 @@
+@(personForm: Form[models.Person])
+@import helper._
+
+<html lang="en">
+    <head>
+        <title>Welcome to Play Framework</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+    </head>
+    <body>
+        <h1>
+            Welcome
+        </h1>
+        <p>
+            Please enter your details to register
+        </p>
+
+        @form(action = routes.Home.submit, args = 'id -> "personForm") {
+
+            @inputText(
+            field = personForm("firstname"),
+            args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false
+            )
+
+            @inputText(
+            field = personForm("lastname"),
+            args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false
+            )
+
+        <p class="buttons">
+            <input type="submit">
+        <p>
+        }
+    </body>
+</html>

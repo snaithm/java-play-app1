@@ -1,0 +1,19 @@
+@(person: Person)
+
+<html lang="en">
+    <head>
+        <title>Welcome to Play Framework</title>
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned(" stylesheets/main.css")">
+    </head>
+    <body>
+        <h1>
+            Success
+        </h1>
+        <p>
+            @person.toString()
+        </p>
+        <p>
+            <a href='@routes.Home.index'>Try again</a>
+        </p>
+    </body>
+</html>
