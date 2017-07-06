@@ -1,4 +1,4 @@
-@(personForm: Form[models.Person])
+@(personForm: Form[models.Person])(errors: String)
 @import helper._
 
 <html lang="en">
@@ -12,6 +12,9 @@
         </h1>
         <p>
             Please enter your details to register
+        </p>
+        <p>
+            @errors
         </p>
 
         @form(action = routes.Home.submit, args = 'id -> "personForm") {
