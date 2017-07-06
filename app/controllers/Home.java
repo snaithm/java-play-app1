@@ -19,7 +19,7 @@ public class Home extends Controller {
 
         Form<Person> personForm = formGen.form(Person.class).bindFromRequest();
         if (personForm.hasErrors()) {
-            return ok(welcome.render(personForm, "Correct the errors below to continue"));
+            return badRequest(welcome.render(personForm, "Correct the errors below to continue"));
         }
 
         return ok(success.render(personForm.get()));
