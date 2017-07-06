@@ -2,6 +2,6 @@
  * extra css not captured by bootstrap
  */
 
-dd {
-  font-weight: bold;
+dd.error {
+  color:  #a94442;
 }

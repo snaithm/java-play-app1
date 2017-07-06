@@ -5,6 +5,7 @@
     <head>
         <title>Welcome to Play Framework</title>
         <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
     </head>
     <body>
         <div class="container">
@@ -19,18 +20,19 @@
                 <strong>@errors</strong>
             </div>
             }
-
             @form(action = routes.Home.submit, args = 'id -> "personForm") {
 
-                @inputText(
-                field = personForm("firstname"),
-                args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false
-                )
+                <div>
+                    @inputText(
+                    field = personForm("firstname"),
+                    args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false)
+                </div>
 
-                @inputText(
-                field = personForm("lastname"),
-                args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false
-                )
+                <div>
+                    @inputText(
+                    field = personForm("lastname"),
+                    args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false)
+                </div>
 
                 <p class="buttons">
                     <button type="submit" class="btn btn-primary">Register</button>
