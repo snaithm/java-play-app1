@@ -1,7 +1,8 @@
 package models;
 
 import static org.junit.Assert.assertEquals;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;
 import javax.validation.Validator;
@@ -24,15 +25,15 @@ public class PersonTests {
 
     @Test
     public void PersonModel_HappyPath() { //default values used from setup
-        Set<ConstraintViolation<Person>> violations = validator.validate(person);
-        assertEquals(0, violations.size());
+        List<ConstraintViolation<Person>> vErrors = new ArrayList<ConstraintViolation<Person>>(validator.validate(person));
+        assertEquals(0, vErrors.size());
     }
 
     @Test
     public void PersonModel_SadPath_FirstnameEmptyString() {
         person.setFirstname("");
-        Set<ConstraintViolation<Person>> violations = validator.validate(person);
-        assertEquals(1, violations.size());
-        assertEquals("Please enter a first name(s)", violations.iterator().next().getMessage());
+        List<ConstraintViolation<Person>> vErrors = new ArrayList<ConstraintViolation<Person>>(validator.validate(person));
+        assertEquals(1, vErrors.size());
+        assertEquals("Please enter a first name(s)", vErrors.get(0).getMessage());
     }
 }
