@@ -4,34 +4,38 @@
 <html lang="en">
     <head>
         <title>Welcome to Play Framework</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
     </head>
     <body>
-        <h1>
-            Welcome
-        </h1>
-        <p>
-            Please enter your details to register
-        </p>
-        <p>
-            @errors
-        </p>
+        <div class="container">
+            <h1>
+                Welcome
+            </h1>
+            <p>
+                Please enter your details to register
+            </p>
+            @if(errors != null){
+            <div class="alert alert-danger">
+                <strong>@errors</strong>
+            </div>
+            }
 
-        @form(action = routes.Home.submit, args = 'id -> "personForm") {
+            @form(action = routes.Home.submit, args = 'id -> "personForm") {
 
-            @inputText(
-            field = personForm("firstname"),
-            args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false
-            )
+                @inputText(
+                field = personForm("firstname"),
+                args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false
+                )
 
-            @inputText(
-            field = personForm("lastname"),
-            args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false
-            )
+                @inputText(
+                field = personForm("lastname"),
+                args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false
+                )
 
-        <p class="buttons">
-            <input type="submit">
-        <p>
-        }
+                <p class="buttons">
+                    <button type="submit" class="btn btn-primary">Register</button>
+                <p>
+            }
+        </div>
     </body>
 </html>

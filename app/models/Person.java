@@ -4,6 +4,7 @@ import play.data.validation.Constraints.*;
 
 public class Person {
 
+    //attributes
     @Required(message = "Please enter a first name(s)")
     @MaxLength(value = 100, message = "First name(s) must not exceed 100 characters")
     @MinLength(value = 2, message = "First name(s) must contain at least 2 characters")
@@ -14,6 +15,7 @@ public class Person {
     @MinLength(value = 2, message = "Last name must contain at least 2 characters")
     private String lastname;
 
+    //methods
     public String getFirstname() {
         return firstname;
     }
@@ -35,6 +37,7 @@ public class Person {
         return "First name: " + this.getFirstname() + " Last name: " + this.getLastname();
     }
 
+    //constructors
     public Person() {} //used for creating a blank form
 
     public Person(String firstname, String lastname) {

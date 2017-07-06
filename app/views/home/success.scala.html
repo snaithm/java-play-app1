@@ -3,17 +3,19 @@
 <html lang="en">
     <head>
         <title>Welcome to Play Framework</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned(" stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
     </head>
     <body>
-        <h1>
-            Success
-        </h1>
-        <p>
-            @person.toString()
-        </p>
-        <p>
-            <a href='@routes.Home.index'>Try again</a>
-        </p>
+        <div class="container">
+            <h1>
+                Success
+            </h1>
+            <p>
+                @person.toString()
+            </p>
+            <p>
+                <a href='@routes.Home.index' class="btn btn-info">Try again</a>
+            </p>
+        </div>
     </body>
 </html>

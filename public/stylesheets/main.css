@@ -1,0 +1,7 @@
+/*!
+ * extra css not captured by bootstrap
+ */
+
+dd {
+  font-weight: bold;
+}
