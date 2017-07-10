@@ -4,8 +4,10 @@
 <html lang="en">
     <head>
         <title>Welcome to Play Framework</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/main.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-3.2.1.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script
     </head>
     <nav class="navbar navbar-inverse bg-inverse">
           <span class="navbar-text">
@@ -21,26 +23,26 @@
                 Please enter your details to register
             </p>
             @if(errors != null){
-            <div class="alert alert-danger">
-                <strong>@errors</strong>
-            </div>
+                <div class="alert alert-danger">
+                    <strong>@errors</strong>
+                </div>
             }
             @form(action = routes.Home.submit, args = 'id -> "personForm") {
 
-                <div>
+                <div class="input-wrapper">
                     @inputText(
                     field = personForm("firstname"),
                     args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false)
                 </div>
 
-                <div>
+                <div class="input-wrapper">
                     @inputText(
                     field = personForm("lastname"),
                     args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false)
                 </div>
 
                 <p class="buttons">
-                    <button type="submit" class="btn btn-primary">Register</button>
+                    <button type="submit" id="welcome_submit" class="btn btn-primary" >Register</button>
                 <p>
             }
         </div>

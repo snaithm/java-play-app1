@@ -38,7 +38,8 @@ public class Person {
     }
 
     //constructors
-    public Person() {} //used for creating a blank form
+    public Person() {
+    } //used for creating a blank form
 
     public Person(String firstname, String lastname) {
         this.firstname = firstname;

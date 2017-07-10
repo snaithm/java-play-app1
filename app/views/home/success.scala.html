@@ -3,7 +3,11 @@
 <html lang="en">
     <head>
         <title>Welcome to Play Framework</title>
-        <link rel="stylesheet" media="screen" href="@routes.Assets.versioned("stylesheets/bootstrap.css")">
+        <meta http-equiv="Content-Security-Policy" content="default-src 'self'">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/bootstrap.css")">
+        <link rel="stylesheet" media="screen" href="@routes.Assets.at("stylesheets/main.css")">
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/jquery-3.2.1.min.js")"></script>
+        <script type="text/javascript" src="@routes.Assets.at("javascripts/main.js")"></script
     </head>
     <nav class="navbar navbar-inverse bg-inverse">
           <span class="navbar-text">
@@ -19,7 +23,7 @@
                 @person.toString()
             </p>
             <p>
-                <a href='@routes.Home.index' class="btn btn-info">Try again</a>
+                <a href='@routes.Home.index' class="btn btn-info" id="success_tryagain">Try again</a>
             </p>
         </div>
     </body>
