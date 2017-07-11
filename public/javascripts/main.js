@@ -1,5 +1,5 @@
 window.onload=function(){
-    document.getElementById("welcome_submit").addEventListener("click", function() { welcomeSubmit(); }, false);
+    //document.getElementById("welcome_submit").addEventListener("click", function() { welcomeSubmit(); }, false);
 }
 
 function welcomeSubmit(){

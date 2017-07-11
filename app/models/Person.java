@@ -21,7 +21,7 @@ public class Person {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname;
+        this.firstname = firstname.toLowerCase();
     }
 
     public String getLastname() {
@@ -29,12 +29,12 @@ public class Person {
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname;
+        this.lastname = lastname.toLowerCase();
     }
 
     @Override
     public String toString() {
-        return "First name: " + this.getFirstname() + " Last name: " + this.getLastname();
+        return this.getFirstname() + " " + this.getLastname();
     }
 
     //constructors
