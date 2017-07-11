@@ -35,24 +35,19 @@ public class Home extends Controller {
     public Result submit() {
 
         Form<User> userForm = formGen.form(User.class).bindFromRequest();
-        if (userForm.hasErrors()) {
-            return badRequest(welcome.render(userForm, validationErrorMsg));
-        }
+        if (userForm.hasErrors()) return badRequest(welcome.render(userForm, validationErrorMsg));
 
         try {
             AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
             AmazonS3 s3client = new AmazonS3Client(credentials);
-            if (usernameExists(userForm.get().getUsername(), s3client)) {
-                return badRequest(welcome.render(userForm, usernameExistsMsg));
-            }
+            if (usernameExists(userForm.get().getUsername(), s3client)) return badRequest(welcome.render(userForm, usernameExistsMsg));
             uploadUserDetailsToS3(userForm.get(), s3client);
+            return ok(success.render(userForm.get()));
         }
         catch (AmazonClientException ae)
         {
             return internalServerError(welcome.render(userForm, serverErrorMsg));
         }
-
-        return ok(success.render(userForm.get()));
     }
 
     private void uploadUserDetailsToS3(User user, AmazonS3 s3client) {

@@ -26,7 +26,7 @@ public class User {
     }
 
     public void setUsername(String username) {
-        this.username = username.toLowerCase();
+        this.username = username.toLowerCase().trim();
     }
 
     public String getFirstname() {
@@ -34,7 +34,7 @@ public class User {
     }
 
     public void setFirstname(String firstname) {
-        this.firstname = firstname.toLowerCase();
+        this.firstname = firstname.toLowerCase().trim();
     }
 
     public String getLastname() {
@@ -42,7 +42,7 @@ public class User {
     }
 
     public void setLastname(String lastname) {
-        this.lastname = lastname.toLowerCase();
+        this.lastname = lastname.toLowerCase().trim();
     }
 
     @Override
