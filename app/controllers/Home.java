@@ -1,6 +1,6 @@
 package controllers;
 
-import models.Person;
+import models.User;
 import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
@@ -23,46 +23,48 @@ public class Home extends Controller {
 
     public Result index() {
 
-        Form<Person> personForm = formGen.form(Person.class);
-        return ok(welcome.render(personForm, null));
+        Form<User> userForm = formGen.form(User.class);
+        return ok(welcome.render(userForm, null));
     }
 
     public Result submit() {
 
-        Form<Person> personForm = formGen.form(Person.class).bindFromRequest();
-        if (personForm.hasErrors()) {
-            return badRequest(welcome.render(personForm, "Correct the errors below to continue"));
+        Form<User> userForm = formGen.form(User.class).bindFromRequest();
+        if (userForm.hasErrors()) {
+            return badRequest(welcome.render(userForm, validationErrorMsg));
         }
-        Person person = personForm.get();
+        User user = userForm.get();
         try {
-            uploadUserDetailsToS3(person);
+            uploadUserDetailsToS3(user);
         }
         catch (AmazonClientException ae)
         {
-            return internalServerError(welcome.render(personForm, "An error has occurred saving your registration details. The data store could not be reached."));
+            return internalServerError(welcome.render(userForm, serverErrorMsg));
         }
-        return ok(success.render(personForm.get()));
+        return ok(success.render(userForm.get()));
     }
 
-    private void uploadUserDetailsToS3(Person person) {
+    private void uploadUserDetailsToS3(User user) {
 
         AWSCredentials credentials = new ProfileCredentialsProvider().getCredentials();
         AmazonS3 s3client = new AmazonS3Client(credentials);
-        String fileName = String.format("%s-%s-registration.txt", person.getFirstname().toLowerCase(), person.getLastname().toLowerCase());
-        ByteArrayInputStream content = new ByteArrayInputStream(createContent(person).getBytes());
+        String fileName = String.format("%s-%s-registration.txt", user.getFirstname().toLowerCase(), user.getLastname().toLowerCase());
+        ByteArrayInputStream content = new ByteArrayInputStream(createContent(user).getBytes());
         s3client.putObject(new PutObjectRequest(bucketName, fileName, content , new ObjectMetadata()));
     }
 
-    private String createContent(Person person) {
+    private String createContent(User user) {
 
         DateFormat df = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
         Date today = Calendar.getInstance().getTime();
         String nowString = df.format(today);
-        return String.format("%s %s accepted t&c on %s", person.getFirstname().toLowerCase(), person.getLastname().toLowerCase(), nowString);
+        return String.format("%s %s accepted t&c on %s", user.getFirstname().toLowerCase(), user.getLastname().toLowerCase(), nowString);
     }
 
     @Inject
     FormFactory formGen;
 
     private final String bucketName = "snaithm-testapp1";
+    private final String validationErrorMsg = "Correct the errors below to continue.";
+    private final String serverErrorMsg = "An error has occurred saving your registration details. The data store could not be reached.";
 }

@@ -2,9 +2,14 @@ package models;
 
 import play.data.validation.Constraints.*;
 
-public class Person {
+public class User {
 
     //attributes
+    @Required(message = "Please enter a username")
+    @MaxLength(value = 10, message = "Username must not exceed 10 characters")
+    @MinLength(value = 2, message = "Username must contain at least 2 characters")
+    private String username;
+
     @Required(message = "Please enter a first name(s)")
     @MaxLength(value = 100, message = "First name(s) must not exceed 100 characters")
     @MinLength(value = 2, message = "First name(s) must contain at least 2 characters")
@@ -16,6 +21,14 @@ public class Person {
     private String lastname;
 
     //methods
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username.toLowerCase();
+    }
+
     public String getFirstname() {
         return firstname;
     }
@@ -34,14 +47,15 @@ public class Person {
 
     @Override
     public String toString() {
-        return this.getFirstname() + " " + this.getLastname();
+        return this.getFirstname() + " " + this.getLastname() + " username: " + this.getUsername();
     }
 
     //constructors
-    public Person() {
+    public User() {
     } //used for creating a blank form
 
-    public Person(String firstname, String lastname) {
+    public User(String firstname, String lastname, String username) {
+        this.username = username;
         this.firstname = firstname;
         this.lastname = lastname;
     }

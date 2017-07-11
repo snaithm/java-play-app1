@@ -1,4 +1,4 @@
-@(personForm: Form[models.Person])(errors: String)
+@(userForm: Form[models.User])(errors: String)
 @import helper._
 
 <html lang="en">
@@ -27,17 +27,23 @@
                     <strong>@errors</strong>
                 </div>
             }
-            @form(action = routes.Home.submit, args = 'id -> "personForm") {
+            @form(action = routes.Home.submit, args = 'id -> "userForm") {
 
                 <div class="input-wrapper">
                     @inputText(
-                    field = personForm("firstname"),
+                    field = userForm("username"),
+                    args = '_label -> "Desired username:", '_showConstraints -> false)
+                </div>
+
+                <div class="input-wrapper">
+                    @inputText(
+                    field = userForm("firstname"),
                     args = '_label -> "First name(s):", 'placeholder -> "Sam", '_showConstraints -> false)
                 </div>
 
                 <div class="input-wrapper">
                     @inputText(
-                    field = personForm("lastname"),
+                    field = userForm("lastname"),
                     args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false)
                 </div>
 
