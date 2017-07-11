@@ -10,7 +10,7 @@ import javax.validation.ValidatorFactory;
 import org.junit.Before;
 import org.junit.Test;
 
-public class PersonTests {
+public class UserTests {
 
     private static Validator validator;
     private User user = new User();
@@ -25,13 +25,53 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_HappyPath() { //default values used from setup
+    public void UserModel_HappyPath() { //default values used from setup
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(0, vErrors.size());
     }
 
     @Test
-    public void PersonModel_SadPath_FirstnameEmptyString() {
+    public void UserModel_SadPath_UsernameEmptyString() {
+        user.setUsername("");
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(1, vErrors.size());
+        assertEquals("Please enter a username", vErrors.get(0).getMessage());
+    }
+
+    @Test
+    public void UserModel_SadPath_UsernameUnderMinLength() {
+        user.setUsername("a");
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(1, vErrors.size());
+        assertEquals("Username must contain at least 2 characters", vErrors.get(0).getMessage());
+    }
+
+    @Test
+    public void UserModel_HappyPath_UsernameEqualsMinLength() {
+        user.setUsername("aa");
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(0, vErrors.size());
+    }
+
+    @Test
+    public void UserModel_SadPath_UsernameOverMaxLength() {
+        String username = new String(new char[11]).replace('\0', 'a');
+        user.setUsername(username);
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(1, vErrors.size());
+        assertEquals("Username must not exceed 10 characters", vErrors.get(0).getMessage());
+    }
+
+    @Test
+    public void UserModel_HappyPath_UsernameOnMaxLength() {
+        String username = new String(new char[10]).replace('\0', 'a');
+        user.setUsername(username);
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(0, vErrors.size());
+    }
+
+    @Test
+    public void UserModel_SadPath_FirstnameEmptyString() {
         user.setFirstname("");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(1, vErrors.size());
@@ -39,7 +79,7 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_SadPath_FirstnameUnderMinLength() {
+    public void UserModel_SadPath_FirstnameUnderMinLength() {
         user.setFirstname("a");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(1, vErrors.size());
@@ -47,14 +87,14 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_HappyPath_FirstnameEqualsMinLength() {
+    public void UserModel_HappyPath_FirstnameEqualsMinLength() {
         user.setFirstname("aa");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(0, vErrors.size());
     }
 
     @Test
-    public void PersonModel_SadPath_FirstnameOverMaxLength() {
+    public void UserModel_SadPath_FirstnameOverMaxLength() {
         String firstName = new String(new char[101]).replace('\0', 'a');
         user.setFirstname(firstName);
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
@@ -63,7 +103,7 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_HappyPath_FirstnameOnMaxLength() {
+    public void UserModel_HappyPath_FirstnameOnMaxLength() {
         String firstName = new String(new char[100]).replace('\0', 'a');
         user.setFirstname(firstName);
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
@@ -71,7 +111,7 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_SadPath_LastnameEmptyString() {
+    public void UserModel_SadPath_LastnameEmptyString() {
         user.setLastname("");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(1, vErrors.size());
@@ -79,7 +119,7 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_SadPath_LastnameUnderMinLength() {
+    public void UserModel_SadPath_LastnameUnderMinLength() {
         user.setLastname("a");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(1, vErrors.size());
@@ -87,14 +127,14 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_HappyPath_LastnameEqualsMinLength() {
+    public void UserModel_HappyPath_LastnameEqualsMinLength() {
         user.setLastname("aa");
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(0, vErrors.size());
     }
 
     @Test
-    public void PersonModel_SadPath_LastnameOverMaxLength() {
+    public void UserModel_SadPath_LastnameOverMaxLength() {
         String lastName = new String(new char[101]).replace('\0', 'a');
         user.setLastname(lastName);
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
@@ -103,7 +143,7 @@ public class PersonTests {
     }
 
     @Test
-    public void PersonModel_HappyPath_LastnameOnMaxLength() {
+    public void UserModel_HappyPath_LastnameOnMaxLength() {
         String lastName = new String(new char[100]).replace('\0', 'a');
         user.setLastname(lastName);
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
