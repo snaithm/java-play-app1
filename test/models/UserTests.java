@@ -20,6 +20,7 @@ public class UserTests {
         user.setUsername("username");
         user.setFirstname("Test first name");
         user.setLastname("Test last name");
+        user.setAcceptTC(true);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         validator = factory.getValidator();
     }
@@ -148,5 +149,13 @@ public class UserTests {
         user.setLastname(lastName);
         List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
         assertEquals(0, vErrors.size());
+    }
+
+    @Test
+    public void UserModel_SadPath_AcceptTcNull() {
+        user.setAcceptTC(null);
+        List<ConstraintViolation<User>> vErrors = new ArrayList<ConstraintViolation<User>>(validator.validate(user));
+        assertEquals(1, vErrors.size());
+        assertEquals("You must accept the terms and conditions before you are able to register", vErrors.get(0).getMessage());
     }
 }

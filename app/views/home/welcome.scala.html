@@ -47,6 +47,13 @@
                     args = '_label -> "Last name:", 'placeholder -> "Smith", '_showConstraints -> false)
                 </div>
 
+                <div class="input-wrapper">
+                    @checkbox(
+                    field = userForm("acceptTC"),
+                    args = '_label -> "I accept the terms and conditions of registration", '_showConstraints -> false)
+                </div>
+
+
                 <p class="buttons">
                     <button type="submit" id="welcome_submit" class="btn btn-primary" >Register</button>
                 <p>

@@ -20,6 +20,9 @@ public class User {
     @MinLength(value = 2, message = "Last name must contain at least 2 characters")
     private String lastname;
 
+    @Required(message = "You must accept the terms and conditions before you are able to register")
+    private Boolean acceptTC;
+
     //methods
     public String getUsername() {
         return username;
@@ -43,6 +46,14 @@ public class User {
 
     public void setLastname(String lastname) {
         this.lastname = lastname.toLowerCase().trim();
+    }
+
+    public Boolean getAcceptTC() {
+        return acceptTC;
+    }
+
+    public void setAcceptTC(Boolean acceptTC) {
+        this.acceptTC = acceptTC;
     }
 
     @Override
