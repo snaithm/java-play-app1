@@ -5,7 +5,6 @@ import play.data.Form;
 import play.data.FormFactory;
 import play.mvc.*;
 import javax.inject.Inject;
-import views.html.home.*;
 import java.io.ByteArrayInputStream;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -17,11 +16,11 @@ import com.amazonaws.auth.AWSCredentials;
 import com.amazonaws.auth.profile.ProfileCredentialsProvider;
 import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3Client;
-import com.amazonaws.services.s3.model.Bucket;
-import com.amazonaws.services.s3.model.ObjectListing;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import com.amazonaws.services.s3.model.S3ObjectSummary;
+import views.html.home.success;
+import views.html.home.welcome;
 
 public class Home extends Controller {
 
